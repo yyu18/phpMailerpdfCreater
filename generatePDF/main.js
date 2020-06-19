@@ -1,0 +1,82 @@
+// JavaScript Document
+
+$(document).ready(function() {
+	"use strict";
+		
+	if ($('#submit-button').length){		
+		$('#submit-button').click(function(){
+			submit_form();
+		});
+	}
+	
+	if ($('input[type=radio]').length){		
+		$('input[type=radio]').change(function(){
+			var selected_option = $(this).data('append-text');
+			if($('input[name="'+selected_option+'"]').length){
+				$('input[name="'+selected_option+'"]').show();
+			} else {
+				if ($('.'+$(this).attr('name')+'-append-text').length){
+					$('.'+$(this).attr('name')+'-append-text').val('');
+					$('.'+$(this).attr('name')+'-append-text').hide();
+				}
+			}
+		});
+	}
+	
+	if ($('input[type=checkbox]').length){	
+		$('input[type=checkbox]').click(function(){
+			var selected_option=$(this).data('append-text');
+			if($('input[name="'+selected_option+'"]').length){
+				if ($(this).is(':checked')){
+					$('input[name="'+selected_option+'"]').show();
+				} else {
+					$('input[name="'+selected_option+'"]').val('');
+					$('input[name="'+selected_option+'"]').hide();
+				}
+				
+			} 
+		});
+	}
+	
+	//assign cookie
+	var ait_cookie=getCookie('aituserguid', false);
+	if (ait_cookie=='false'){
+		ait_cookie={id:'markup'};
+		setCookie('aituserguid', ait_cookie);
+	} else {
+		ait_cookie=$.parseJSON(ait_cookie);
+	}
+	if ($('input[name=cookie]').length){	
+		$('input[name=cookie]').val(ait_cookie.id);
+	}
+});
+
+
+function submit_form(){	
+	var data={};
+	var form_data=$('#main-form').serializeArray();
+			
+	$.each(form_data,function(idx,val){
+		if (val.value.length){
+			if (val.name in data){
+				data[val.name].push(val.value);
+			} else {
+				data[val.name]=[];
+				data[val.name].push(val.value);
+			}			
+		}
+	});
+	
+	$.post( '/api/campaigns/submit_form.php', data, function ( result ) {
+
+		if ( result.message ) {
+			alert(result.message);
+		} else {			
+			window.location.replace('/templates/default/result.php?id='+$('input[name="camp_id"]').val());
+		}
+
+	} ).done( function () {} ).fail( function ( xhr ) {
+		console.log( xhr.responseText || ( xhr.status + ', ' + xhr.statusText ) );
+	} );
+	
+}

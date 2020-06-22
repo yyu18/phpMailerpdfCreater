@@ -2,14 +2,14 @@
 
 $(document).ready(function() {
 	
-	if(localStorage.getItem("finished_survey")=="1"){
+	if(localStorage.getItem("finished_survey")==1){
 		window.location.replace("https://events.singtao.ca/templates/default/already_finished_form.php");
 	} else{
 	"use strict";
 	
 	if ($('#submit-button').length){		
 		$('#submit-button').click(function(){
-			localStorage.setItem("finished_survey", $('input[name=finished_survey]').val());
+			localStorage.setItem("finished_survey",1);
 			//console.log($('#confirmation_id').val());
 			submit_form();
 		});

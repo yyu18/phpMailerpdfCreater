@@ -62,7 +62,6 @@
 			<form id="main-form" enctype="multipart/form-data"  accept-charset="UTF-8" action="https://events.singtao.ca/templates/default/result_su.php" method="POST" onsubmit="redirectPageForSubmit()">
 				<input type="hidden" name="camp_id" value="<?php echo $camp_id;?>" />
 				<input type="hidden" name="cookie" value="213erewr" />
-				<input type="hidden" name="finished_survey" value="1" />
 				<input type="hidden" name="agreement" value="false" />
 				<?php foreach ($slides as $idx=>$slide){ ?>
 						<?php echo generateSlideContent(($idx+1), $slide); ?>
@@ -105,7 +104,7 @@ function generateSlideContent($idx, $slide){
 	else 
 		$slide->label=$idx.'. '.$slide->label;
 	if($slide->key =='confirmation_id'){
-		$randomId = generateRandomString(6);
+		$randomId = generateRandomString(4);
 		$html.='<p><input style="display:none;" id = "confirmation_id" type="'.$slide->type.'" class="add-on-textfield" name="'.$slide->key.'" value="'.$randomId.'" /></p>';
 	}  elseif($slide->key =='specialQuestion'){
 		$html.='<p>'.$slide->label.'</p>';

@@ -1,3 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body {
+	font-family: "Mircosoft JhengHei", "新細明體", "mingliu", Arial, Helvetica, sans-serif;
+	color: #231815;
+	font-size: 15px;
+}
+</style>
+<title>Send Email</title>
+</head>
+<body>
+
 <?php
 	require('../phpMailer/phpmailer/class.phpmailer.php');
 
@@ -11,8 +25,8 @@
         echo '
         <div style="text-align:center">
         <img src="./imgs/singtao_logo.JPG" alt="Singtao Logo" width="300" height="160">
-        <p>You Need To Finish The Survey First</p></div>';    
-    }
+        <h3>You Need To Finish The Survey First</h3></div>'
+        ;}
     function sendEmail($userMail,$adminMail,$id){
         date_default_timezone_set('America/Toronto');
         $mail = new PHPMailer(true);
@@ -56,7 +70,10 @@
             echo '
                 <div style="text-align:center">
                 <img src="./imgs/singtao_logo.JPG" alt="Singtao Logo" width="300" height="160">
-                <p>Email sent successfully! Please Check it in your mailbox</p></div>';  
+                <h3>Email sent successfully! Please Check it in your mailbox</h3></div>';  
         }
     }
 ?>
+
+</body>
+</html>

@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Page Title</title>
+<style>
+  body {
+	font-family: "Mircosoft JhengHei", "新細明體", "mingliu", Arial, Helvetica, sans-serif;
+	color: #231815;
+	font-size: 15px;
+}
+</style>
+<title>Thanks For Your Submit</title>
 </head>
 <body>
 
@@ -34,7 +41,7 @@
 	echo '
 	<div style="text-align:center">
 	<img src="./imgs/singtao_logo.JPG" alt="Singtao Logo" width="300" height="160">
-	<p>Email sent successfully! Please Check it in your mailbox</p></div>';
+	<h3>You Need To Finish The Survey First!</h3></div>';
 }
 
 require('../generatePDF/fpdf.php');
@@ -47,8 +54,8 @@ function Header()
 	// Logo
 	//$this->centreImage("https://events.singtao.ca/vouchers/44/A1448547098.png");
 	//$this->Cell(0,10,'ADVERTISING VOUCHER',0,1,'C');
-	$this->Image('https://www.singtao.ca/wp-content/themes/singtaoca2019/images/logo.png',80,6,50,0,'PNG');
-	$this->Ln(15);
+	$this->Image("https://events.singtao.ca/templates/default/imgs/singtao_logo.JPG",80,6,50,0,'JPG');
+	$this->Ln(25);
 	// Arial bold 15
 	$this->SetFont('Arial','B',15);
 	// Title
@@ -82,11 +89,12 @@ $pdf->Multicell(0,5,"Thank you for participating Sing Tao Business Recovery Adve
 Tao Media Group Canada.
 
 
-Terms &amp; Conditions:
--	  Expiry date: September 30, 2020. Order must be placed by the expiry date in order to redeem the
-	   advertising voucher. Ad fulfillment must be finished by end of 2020.
--	  Advertising voucher is applicable to any new advertising orders, but not applicable for settling any
-	   previous advertising orders.
+Terms & Conditions:
+-	  Advertising voucher can only be applied to advertising placement, excluding production. 
+-	  Advertising booking and placement must be finished by October 31, 2020.  
+-	  Advertising voucher is applicable to new advertising orders, but not for settling any previous advertising orders. 
+-	  Each Company can only redeem one advertising voucher.
+
 	   
 	 
 	 
@@ -100,7 +108,6 @@ SING TAO MEDIA GROUP CANADA
 
 $filename="/var/www_events.singtao/html/templates/default/pdfSaver/voucher_$id.pdf";
 $pdf->Output('F',$filename);
-echo "<embed src='https://events.singtao.ca/templates/default/pdfSaver/voucher_$id.pdf' width='500' height='375' type='application/pdf'>";
 ?>
 
 </div>
